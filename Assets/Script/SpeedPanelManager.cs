@@ -11,6 +11,11 @@ public class SpeedPanelManager : MonoBehaviour {
     public float maxSpeed;
     private float _currentSpeed = 0;
 
+    /// <summary>
+    /// CurrentSpeed for the speed panel. It a view of the speed of the ship.
+    /// Get : get the speed
+    /// Set : Change the speed, update the slider and the differents marks.
+    /// </summary>
     public float currentSpeed
     {
         get
