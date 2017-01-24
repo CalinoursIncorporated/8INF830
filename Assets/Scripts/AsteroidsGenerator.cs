@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AsteroidsGenerator : MonoBehaviour {
 
-	public GameObject[] asteroids;  // Initialized in the inspector
+	public GameObject[] asteroids; 
 	private Vector3 origin = Vector3.zero;
 
 	private float minSize = 0.2f;
@@ -16,11 +16,18 @@ public class AsteroidsGenerator : MonoBehaviour {
 	private float minDistance = 30.0f;
 	private float maxDistance = 150.0f;
 
+	/// <summary>
+	/// Start this instance.
+	/// </summary>
 	 void Start () {
 		origin = transform.position;
 		GenerateAsteroids(Random.Range(minCount, maxCount));
 	}
 
+	/// <summary>
+	/// Generates the asteroids.
+	/// </summary>
+	/// <param name="asteroidsCount">Asteroids count.</param>
 	public void GenerateAsteroids (int asteroidsCount) {
 		for (int i = 0; i < asteroidsCount; i++) {
 			float size = Random.Range(minSize, maxSize);
