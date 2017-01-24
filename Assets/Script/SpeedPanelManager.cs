@@ -77,8 +77,7 @@ public class SpeedPanelManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //TODO : project the velocity vector on the forward ship vector in order to get the forward velocity. Can be negative if ship go back.
-        currentSpeed = -shipRigibody.velocity.magnitude;
+        currentSpeed = shipRigibody.velocity.x;
        
 	}
 }
