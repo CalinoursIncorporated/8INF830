@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpeedPanelManager : MonoBehaviour {
+public class SpeedPanelManager : MonoBehaviour
+{
 
     public GameObject ship;
     private Rigidbody shipRigibody;
@@ -36,7 +37,7 @@ public class SpeedPanelManager : MonoBehaviour {
             else if (_currentSpeed < -(maxSpeed * 1 / 3))
             {
                 slider.minValue = _currentSpeed;
-                markNega.transform.Find("Text").GetComponent<Text>().text =  (_currentSpeed).ToString(); ;
+                markNega.transform.Find("Text").GetComponent<Text>().text = (_currentSpeed).ToString(); ;
             }
             else
             {
@@ -57,8 +58,9 @@ public class SpeedPanelManager : MonoBehaviour {
     private GameObject markNega;
     private Slider slider;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         mark100 = transform.Find(">100%Mark").gameObject;
         mark66 = transform.Find("66%Mark").gameObject;
         mark33 = transform.Find("33%Mark").gameObject;
@@ -69,8 +71,8 @@ public class SpeedPanelManager : MonoBehaviour {
         shipRigibody = ship.GetComponentInChildren<Rigidbody>();
 
         mark100.transform.Find("Text").GetComponent<Text>().text = (maxSpeed).ToString();
-        mark66.transform.Find("Text").GetComponent<Text>().text = (maxSpeed*2/3).ToString(); 
-        mark33.transform.Find("Text").GetComponent<Text>().text = (maxSpeed/ 3).ToString(); 
+        mark66.transform.Find("Text").GetComponent<Text>().text = (maxSpeed * 2 / 3).ToString();
+        mark33.transform.Find("Text").GetComponent<Text>().text = (maxSpeed / 3).ToString();
         mark0.transform.Find("Text").GetComponent<Text>().text = "0";
         markNega.transform.Find("Text").GetComponent<Text>().text = "-" + (maxSpeed * 1 / 3).ToString();
 
@@ -79,10 +81,17 @@ public class SpeedPanelManager : MonoBehaviour {
         slider.value = currentSpeed;
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-        currentSpeed = shipRigibody.velocity.x;
-       
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    private void FixedUpdate()
+    {
+        //Project the ship velocity on his heading vector to get heading velocity.
+        currentSpeed = Vector3.Project(shipRigibody.velocity, shipRigibody.gameObject.transform.forward).sqrMagnitude;
+
+    }
 }
