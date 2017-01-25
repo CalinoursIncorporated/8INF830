@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +24,6 @@ public class AsteroidsGenerator : MonoBehaviour {
 	/// </summary>
 	public float minDistance = 30.0f;
 	public float maxDistance = 150.0f;
-
 	 void Start () {
 		origin = transform.position;
 		GenerateAsteroids(Random.Range(minCount, maxCount));

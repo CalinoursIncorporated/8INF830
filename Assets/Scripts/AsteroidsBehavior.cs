@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,16 +32,14 @@ public class AsteroidsBehavior : MonoBehaviour {
 	/// mySpeed : movement speed on y axis.
 	/// mzSpeed : movement speed on z axis.
 	/// </summary>
-	private int mxSpeed;
-	private int mySpeed;
-	private int mzSpeed;
+	private int minmSpeed = 1;
+	private int maxmSpeed = 20;
 
 	/// <summary>
 	/// Attribute the rotation and movement speed for the asteroid.
 	/// Apply a force to the asteroid.
 	/// </summary>
 	void Start () {
-
 		rb = GetComponent<Rigidbody>();
 
 		mxSpeed = Random.Range (minmSpeed, maxmSpeed);
@@ -54,8 +52,6 @@ public class AsteroidsBehavior : MonoBehaviour {
 
 		Vector3 movement = new Vector3(mxSpeed, mySpeed, mzSpeed);
 		rb.AddForce(movement);
-
-
 	}
 	
 	/// <summary>
@@ -63,6 +59,5 @@ public class AsteroidsBehavior : MonoBehaviour {
 	/// </summary>
 	void FixedUpdate () {
 		transform.Rotate (new Vector3 (rxSpeed, rySpeed, rzSpeed) * Time.deltaTime);
-
 	}
 }
