@@ -10,9 +10,9 @@ GameObject:
   - component: {fileID: 474770}
   - component: {fileID: 3334210}
   - component: {fileID: 2370562}
-  - component: {fileID: 114935247197439820}
   - component: {fileID: 54771907041197244}
   - component: {fileID: 64713738700448134}
+  - component: {fileID: 114988342971805038}
   m_Layer: 0
   m_Name: astre_4
   m_TagString: Untagged
@@ -108,10 +108,10 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 1
-  m_InflateMesh: 0
+  m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: b0e323a8dc39a3349963ab7b1946dd63, type: 3}
---- !u!114 &114935247197439820
+--- !u!114 &114988342971805038
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -119,10 +119,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 156152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e610d77d563534b58ae94aedb9670c2b, type: 3}
+  m_Script: {fileID: 11500000, guid: d300b3cc38092469290b7a656e8c5a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minrSpeed: 1
-  maxrSpeed: 8
-  minmSpeed: 10
-  maxmSpeed: 200
+  health: 50
+  asteroidsParticules:
+  - {fileID: 102630, guid: 678bc45fa6df37043b80d12daa3a9d51, type: 2}
+  - {fileID: 152982, guid: 75204aeb0b1f4194e8dd78998abb7652, type: 2}
+  - {fileID: 111306, guid: 7255e26f7d2981d4ea7ed83351d2d805, type: 2}
+  - {fileID: 114474, guid: 6f6b913233923554eb49f4cb7bd23ff4, type: 2}
+  - {fileID: 156152}
+  - {fileID: 112560, guid: fdba5130b4369c4418d13375cbd4f27c, type: 2}
+  particuleSize: 0.1
+  previousTime: 0
+  timeDelay: 0.1
