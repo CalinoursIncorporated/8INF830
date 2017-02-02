@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 2349010}
   - component: {fileID: 54749700381260220}
   - component: {fileID: 64987485695217952}
-  - component: {fileID: 114842190608105560}
+  - component: {fileID: 114272903571118726}
+  - component: {fileID: 114028316726505070}
+  - component: {fileID: 114784088915027504}
   m_Layer: 0
   m_Name: astre_9
   m_TagString: Untagged
@@ -111,7 +113,41 @@ MeshCollider:
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 01338adcd63431e4995b638affc5279f, type: 3}
---- !u!114 &114842190608105560
+--- !u!114 &114028316726505070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2ad5765587d4a64828a35e8a877bac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mineral: {fileID: 0}
+  mineralCountProbability:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  mineralCount: 0
+--- !u!114 &114272903571118726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3253d411d33b940fabe92e70ccc142da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minrSpeed: 1
+  maxrSpeed: 8
+  minmSpeed: 10
+  maxmSpeed: 200
+--- !u!114 &114784088915027504
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -122,14 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d300b3cc38092469290b7a656e8c5a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
-  asteroidsParticules:
-  - {fileID: 102630, guid: 678bc45fa6df37043b80d12daa3a9d51, type: 2}
-  - {fileID: 152982, guid: 75204aeb0b1f4194e8dd78998abb7652, type: 2}
-  - {fileID: 111306, guid: 7255e26f7d2981d4ea7ed83351d2d805, type: 2}
-  - {fileID: 114474, guid: 6f6b913233923554eb49f4cb7bd23ff4, type: 2}
-  - {fileID: 156152, guid: 93a05d93f0fd810439cd9267453b0865, type: 2}
-  - {fileID: 112560, guid: fdba5130b4369c4418d13375cbd4f27c, type: 2}
+  health: 100
+  particule: {fileID: 1027570773081274, guid: 20f3420a3321f4b26ba42e4cf25517a4, type: 2}
   particuleSize: 0.1
   previousTime: 0
   timeDelay: 0.1

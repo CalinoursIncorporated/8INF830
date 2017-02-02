@@ -10,29 +10,16 @@ public class AsteroidsDesintegration : MonoBehaviour {
 	public float health = 100f;
 
 	/// <summary>
-	/// The asteroids particules after destruction.
+	/// The asteroids particules explosion prefab.
 	/// particuleSize : size of the particules
 	/// </summary>
-	public GameObject[] asteroidsParticules; 
+	public GameObject particule;
 	public float particuleSize = 0.1f;
 
 	/// <summary>
-	/// Time decrementation testing
-	/// previousTime is a float to stock the previous time where the function happened
-	/// timeDelay is a float to indicate how often the function is being called
-	/// </summary>
-	public float previousTime = 0f;
-	public float timeDelay = 0.1f;
-
-	/// <summary>
-	/// decrements asteroid Health every timeDelay second, and 
-	/// desintegrates it if its health goes below 0
+	/// Desintegrates it if its health goes below 0
 	/// </summary>
 	void Update(){
-		if (Time.time > previousTime + timeDelay){
-			health = health - 1;
-			previousTime = Time.time;
-		}
 		if (health <= 0f) {
 			desintegrate ();
 		}
@@ -45,26 +32,11 @@ public class AsteroidsDesintegration : MonoBehaviour {
 	public void desintegrate(){
 		AsteroidsMineral asm = this.gameObject.GetComponent <AsteroidsMineral>();
 		Debug.Log ("You collected " + asm.mineralCount + " minerals");
-		for (int i = 0; i < asteroidsParticules.Length; i++) {
-			float size = particuleSize;
-			GameObject prefab = asteroidsParticules [i];
-			Vector3 position = Vector3.zero;
-			Vector3 origin = transform.position;
 
-			for (int j = 0; j < 100; j++) {
-				position = Random.insideUnitSphere * (2*size);
-				position += origin;
-				if (!Physics.CheckSphere(position, size / 2.0f)) {
-					break;
-				}
-			}
-			GameObject go = Instantiate(prefab, position, Random.rotation);
-			Destroy(go.GetComponent("AsteroidsMineral"));
-			Destroy(go.GetComponent("AsteroidsDesintegration"));
-			go.AddComponent <AsteroidsParticules>();
-			go.transform.localScale = new Vector3(size, size, size);
-		}
+		Instantiate(particule, transform.position, Random.rotation);
+
 		Destroy (this.gameObject);
-	}
+		}
+
 
 }

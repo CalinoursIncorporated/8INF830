@@ -48,8 +48,6 @@ public class AsteroidsGenerator : MonoBehaviour {
 				}
 			}
 			GameObject go = Instantiate(prefab, position, Random.rotation);
-			go.AddComponent<AsteroidsMovement> ();
-			go.AddComponent <AsteroidsMineral>();
 			go.transform.localScale = new Vector3(size, size, size);
 		}
 	}
