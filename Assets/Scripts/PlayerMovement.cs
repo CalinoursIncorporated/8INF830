@@ -23,6 +23,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
+
+    void FixedUpdate()
+    {
         Vector3 acceleration = ComputeThrusts();
         Vector3 torque = ComputeTorques();
 
