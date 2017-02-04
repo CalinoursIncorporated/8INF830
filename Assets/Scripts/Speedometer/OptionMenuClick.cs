@@ -8,7 +8,7 @@ public class OptionMenuClick : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        gameObject.SetActive(false);
+        
     }
 
     /// <summary>
@@ -35,6 +35,8 @@ public class OptionMenuClick : MonoBehaviour
     public void OnLaunchMenu()
     {
         gameObject.SetActive(true);
+        Time.timeScale = 0;
+        Cursor.visible = true;
         //TODO : Pause game, unlock cursor
     }
 
@@ -45,6 +47,8 @@ public class OptionMenuClick : MonoBehaviour
     public void OnResumeGame()
     {
         gameObject.SetActive(false);
+        Time.timeScale = 1;
+        Cursor.visible = false;
         //TODO : UnpauseGame, lock cursor
     }
     /// <summary>
