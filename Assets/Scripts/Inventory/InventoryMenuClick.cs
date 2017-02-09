@@ -17,25 +17,22 @@ public class InventoryMenuClick : MonoBehaviour {
 	/// </summary>
 	public void OnLaunch()
 	{
-		if (gameObject.activeInHierarchy) {
-
-			OnResume ();
-		} else {
-
+        
+		if (gameObject.activeInHierarchy)
+        {
+            //The inventory is open, so we want to close it
+            gameObject.SetActive(false);
+            OptionMenuClick.UnPauseGame();
+        }
+        else
+        {
+            //The inventory is close, so we want to open it
 			gameObject.SetActive (true);
-		}
+            OptionMenuClick.PauseGame();
+        }
 		//TODO : unlock cursor
 	}
 
-	/// <summary>
-	/// Use when the user click on the resume menu button
-	/// close the menu
-	/// </summary>
-	public void OnResume()
-	{
-		gameObject.SetActive(false);
-		//TODO : lock cursor
-	}
 	/// <summary>
 	/// Use when the user clik on the Quit menu button
 	/// </summary>
