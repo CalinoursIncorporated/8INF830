@@ -51,7 +51,7 @@ public class MiningLaserScript : MonoBehaviour {
             if (Physics.Raycast(miningray, out hit, range))
             {
                 line.SetPosition(1, hit.point);
-                AsteroidsDesintegration asscript = hit.transform.gameObject.GetComponent<AsteroidsDesintegration>();
+                Asteroid asscript = hit.transform.gameObject.GetComponent<Asteroid>();
                 if (asscript != null)
                 {
                     HealthGauge.enabled = true;
