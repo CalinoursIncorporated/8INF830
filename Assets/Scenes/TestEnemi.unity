@@ -91,6 +91,48 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &443364548
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4342231033483334, guid: 527a9f57a94dd8249bebc71e62231972, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342231033483334, guid: 527a9f57a94dd8249bebc71e62231972, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342231033483334, guid: 527a9f57a94dd8249bebc71e62231972, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342231033483334, guid: 527a9f57a94dd8249bebc71e62231972, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342231033483334, guid: 527a9f57a94dd8249bebc71e62231972, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342231033483334, guid: 527a9f57a94dd8249bebc71e62231972, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342231033483334, guid: 527a9f57a94dd8249bebc71e62231972, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342231033483334, guid: 527a9f57a94dd8249bebc71e62231972, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 527a9f57a94dd8249bebc71e62231972, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &768352051
 Prefab:
   m_ObjectHideFlags: 0
@@ -140,6 +182,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114696440821187230, guid: cf5e081f85892354389297abe11967af,
+        type: 2}
+      propertyPath: mineralCountProbability.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4026928776345070, guid: cf5e081f85892354389297abe11967af, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -195,6 +242,31 @@ Prefab:
         type: 2}
       propertyPath: maxSize
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114696440821187230, guid: cf5e081f85892354389297abe11967af,
+        type: 2}
+      propertyPath: mineralCountProbability.Array.data[1]
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114696440821187230, guid: cf5e081f85892354389297abe11967af,
+        type: 2}
+      propertyPath: mineralCountProbability.Array.data[2]
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114696440821187230, guid: cf5e081f85892354389297abe11967af,
+        type: 2}
+      propertyPath: mineralCountProbability.Array.data[3]
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 114696440821187230, guid: cf5e081f85892354389297abe11967af,
+        type: 2}
+      propertyPath: mineralCountProbability.Array.data[4]
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 114696440821187230, guid: cf5e081f85892354389297abe11967af,
+        type: 2}
+      propertyPath: mineralCountProbability.Array.data[5]
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf5e081f85892354389297abe11967af, type: 2}
@@ -379,8 +451,8 @@ GameObject:
 GameObject:
   m_PrefabParentObject: {fileID: 1502308231812274, guid: 4dd1f6e92aa101648b50d9095f3e598a,
     type: 2}
-  m_PrefabInternal: {fileID: 1935535922}
---- !u!1001 &1935535922
+  m_PrefabInternal: {fileID: 1823133918}
+--- !u!1001 &1823133918
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
