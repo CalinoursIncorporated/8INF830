@@ -19,6 +19,6 @@ public class ProjectileScript : MonoBehaviour {
             //entity.gameObject.GetComponent<AsteroidsDesintegration>().health -= 5;
             Debug.Log("Something hit");
             //Debug.Log(entity.gameObject.GetComponent<AsteroidsDesintegration>().health);
-            Destroy(gameObject);
+            //Destroy(gameObject);
     }
 }
