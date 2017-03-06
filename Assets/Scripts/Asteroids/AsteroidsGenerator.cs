@@ -91,6 +91,29 @@ public class AsteroidsGenerator : MonoBehaviour {
         }
         astToSet.idMineral = idMineral[i];
 
+        switch(idMineral[i])
+        {
+            case 100:
+                astToSet.GetComponent<MeshRenderer>().material.color = Color.blue;
+                break;
+            case 101:
+                astToSet.GetComponent<MeshRenderer>().material.color = Color.green;
+                break;
+            case 102:
+                astToSet.GetComponent<MeshRenderer>().material.color = Color.red;
+                break;
+            case 103:
+                astToSet.GetComponent<MeshRenderer>().material.color = Color.yellow;
+                break;
+            case 104:
+                astToSet.GetComponent<MeshRenderer>().material.color = Color.magenta;
+                break;
+            case 105:
+                astToSet.GetComponent<MeshRenderer>().material.color = Color.cyan;
+                break;
+            default:
+                break;
+        }
 
     }
 
@@ -161,6 +184,5 @@ public class AsteroidsGenerator : MonoBehaviour {
         rb.AddTorque(rotation);
     }
     #endregion
-
-
+    
 }
