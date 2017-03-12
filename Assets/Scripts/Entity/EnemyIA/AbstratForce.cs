@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class AbstratForce : MonoBehaviour {
 
-    public float Weight;
+    public float Weight = 15;
 
     public abstract Vector3 CalculateForce();
 }
