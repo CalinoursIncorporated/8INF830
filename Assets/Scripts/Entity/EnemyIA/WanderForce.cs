@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class WanderForce : AbstratForce {
 
-    public float CircleRadius = 1;
-    public float TurnChance = 0.01f;
-    public float MaxRadius = 4;
+    private float CircleRadius = 1;
+    private float TurnChance = 0.01f;
+    private float MaxRadius = 4;
 
 
     private Vector3 velocity;
@@ -17,7 +17,7 @@ public class WanderForce : AbstratForce {
 
     public override Vector3 CalculateForce()
     {
-        return GetWanderForce();
+        return GetWanderForce().normalized;
     }
 
 

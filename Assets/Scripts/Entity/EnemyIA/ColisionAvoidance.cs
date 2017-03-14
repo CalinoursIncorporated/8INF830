@@ -37,7 +37,7 @@ public class ColisionAvoidance : AbstratForce {
 
         }
 
-        return ret;
+        return ret.normalized;
     }
 
 }

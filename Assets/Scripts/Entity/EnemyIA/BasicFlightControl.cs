@@ -25,7 +25,7 @@ public class BasicFlightControl : MonoBehaviour{
 
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         Vector3 force = CalculateForces();
         //Forward axis
@@ -81,4 +81,35 @@ public class BasicFlightControl : MonoBehaviour{
         return totalForce;
     }
 
+    public void newSeekForce(Transform waypoint,float weight = 1)
+    {
+        SeekForce temp = gameObject.AddComponent<SeekForce>();
+        temp.wayPoint = waypoint;
+        temp.Weight = weight;
+        temp.enabled = true;
+    }
+
+    public void newCollisionAvoidanceForce(Collider col,float weight = 1)
+    {
+        ColisionAvoidance temp = gameObject.AddComponent<ColisionAvoidance>();
+        temp.zoneDetection = col;
+        temp.Weight = weight;
+        temp.enabled = true;
+    }
+
+    public void newWanderForce(float weight=1)
+    {
+        WanderForce temp = gameObject.AddComponent<WanderForce>();
+        temp.Weight = weight;
+        temp.enabled = true;
+    }
+
+    public void newOrbitForce(Transform waypoint,float distance = 10, float weight = 1)
+    {
+        OrbitForce temp = gameObject.AddComponent<OrbitForce>();
+        temp.wayPoint = waypoint;
+        temp.orbitDistance = distance;
+        temp.Weight = weight;
+        temp.enabled = true;
+    }
 }

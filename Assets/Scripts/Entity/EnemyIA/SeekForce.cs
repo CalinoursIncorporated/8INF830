@@ -11,6 +11,10 @@ public class SeekForce : AbstratForce
     public override Vector3 CalculateForce()
     {
         Vector3 force = wayPoint.position - gameObject.transform.position;
+        if(force.magnitude>1)
+        {
+            force = force.normalized;
+        }
         return force;
     }
 }
