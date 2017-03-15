@@ -19,6 +19,9 @@ public class InventoryMenuClick : MonoBehaviour
         if (gameObject.activeInHierarchy)
         {
             //The inventory is open, so we want to close it
+			GameObject inv = GameObject.Find ("Inventory");
+			Tooltip tooltip = inv.GetComponent<Tooltip> ();
+			tooltip.Deactivate ();
             gameObject.SetActive(false);
             OptionMenuClick.UnPauseGame();
         }

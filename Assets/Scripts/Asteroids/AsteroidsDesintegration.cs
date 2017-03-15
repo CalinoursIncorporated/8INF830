@@ -9,11 +9,11 @@ public class AsteroidsDesintegration : MonoBehaviour {
 	/// </summary>
 	public float health = 100f;
 
-    private GameObject inv;
+	private InventoryController inventoryController;
 
     void Start()
     {
-        inv = GameObject.Find("Inventory");
+		inventoryController = GameObject.Find("Inventory").GetComponent<InventoryController>();
     }
 
     /// <summary>
@@ -35,7 +35,7 @@ public class AsteroidsDesintegration : MonoBehaviour {
         {
             for (int i = 0; i < asm.mineralCount; i++)
             {
-                inv.GetComponent<Inventory>().AddItem(asm.id);
+				inventoryController.addItem(asm.id);
             }
         }
 

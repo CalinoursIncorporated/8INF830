@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 224183182567785498}
   - component: {fileID: 222031982095422332}
   - component: {fileID: 114035553726557550}
-  - component: {fileID: 114064145532620274}
   - component: {fileID: 114113081168440448}
   - component: {fileID: 225153655326462864}
+  - component: {fileID: 114767951498810700}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -76,19 +76,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114064145532620274
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231467669643538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 597565a2344444e978530b4a6b794a58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amount: 0
-  slot: 0
 --- !u!114 &114113081168440448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -107,6 +94,24 @@ MonoBehaviour:
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+--- !u!114 &114767951498810700
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231467669643538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 597565a2344444e978530b4a6b794a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item:
+    id: -1
+    title: 
+    price: 0
+    description: 
+    stackable: 0
+    slug: 
 --- !u!114 &114842803104142592
 MonoBehaviour:
   m_ObjectHideFlags: 1
