@@ -18,7 +18,7 @@ public class PursuitForce : AbstratForce
         
 
         Rigidbody rb = wayPoint.gameObject.GetComponent<Rigidbody>();
-        if(useTargeVelocity &&  rb != null)
+        if(useTargeVelocity == true  &&  rb != null)
         {
             Vector3 vel = rb.velocity;
             Vector3 forwardOff = Vector3.Project(vel, wayPoint.forward);

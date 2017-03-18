@@ -16,12 +16,12 @@ public class ColisionAvoidance : AbstratForce {
         toRemove = new List<Collider>();
     }
 
-    void OnTriggerEnter(Collider other)
+    void CollisionAvoidanceEnter(Collider other)
     {
         listInDetection.Add(other);
     }
 
-    void OnTriggerExit(Collider other)
+    void CollisionAvoidanceExit(Collider other)
     {
         listInDetection.Remove(other);
     }
