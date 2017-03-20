@@ -28,7 +28,6 @@ public class LocateAndDestroy : MonoBehaviour {
 
     public void DetectionZoneEnter(Collider other)
     {
-        Debug.Log("Enter" +other);
         if (other.tag == tagToAttack)
         {
             detectedTargets.Add(other);
@@ -39,7 +38,6 @@ public class LocateAndDestroy : MonoBehaviour {
 
     public void DetectionZoneExit(Collider other)
     {
-        Debug.Log("Exit" + other);
         detectedTargets.Remove(other);
         updateBehavior();
     }
@@ -48,7 +46,6 @@ public class LocateAndDestroy : MonoBehaviour {
     {
         if(detectedTargets.Count>=1)
         {
-            Debug.Log("TargetLocked");
             target = detectedTargets[0].GetComponentInParent<Entity>().transform;
 
 

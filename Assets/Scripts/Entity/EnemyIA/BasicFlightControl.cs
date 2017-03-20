@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BasicFlightControl : MonoBehaviour{
 
-    Enemy parent;
+    Entity parent;
     Rigidbody rb;
 
 
@@ -15,7 +15,7 @@ public class BasicFlightControl : MonoBehaviour{
     protected void Start()
     {
        
-        parent = GetComponent<Enemy>();
+        parent = GetComponent<Entity>();
         if(parent == null)
         {
             enabled = false;
