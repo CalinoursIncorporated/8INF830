@@ -47,15 +47,18 @@ public class Item
 			description = value;
 		}
 	}
-	public bool Stackable
+    /// <summary>
+    /// -1 if not stackable
+    /// </summary>
+	public int StackSize
 	{
 		get
 		{
-			return stackable;
+			return stackSize;
 		}
 		set
 		{
-			stackable = value;
+			stackSize = value;
 		}
 	}
 	public string Slug
@@ -76,20 +79,20 @@ public class Item
 	public string title;
 	public int price;
 	public string description;
-	public bool stackable;
+	public int stackSize;
 	public string slug;
 	public void SetSprite()
 	{
 		this.Sprite = Resources.Load<Sprite>("UIImage/" + slug);
 	}
 
-	public Item(int id, string title, int value, string description, bool stackable, string slug)
+	public Item(int id, string title, int value, string description, int stackSize, string slug)
 	{
 		this.ID = id;
 		this.Title = title;
 		this.Price = value;
 		this.Description = description;
-		this.Stackable = stackable;
+		this.StackSize = stackSize;
 		this.Slug = slug;
 		SetSprite();
 	}

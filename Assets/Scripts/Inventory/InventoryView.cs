@@ -1,117 +1,242 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 
-public class InventoryView : MonoBehaviour {
+public class InventoryView : MonoBehaviour
+{
 
-	public GameObject inventoryPanel;
-	public GameObject slotPanel;
-	public GameObject inventorySlot;
-	public GameObject inventoryItem;
-
-	/// <summary>
-	/// The slot amount.
-	/// </summary>
-	private int slotAmount;
-
-	private InventoryModel inventoryModel;
-
-	/// <summary>
-	/// List of slots.
-	/// </summary>
-	public GameObject[] slots;
-
-	/// <summary>
-	/// which slots countains which item ? this allows the link between the models item and the view item.
-	/// </summary>
-	public Dictionary<Item, int> itemsData = new Dictionary<Item, int>(); 
-
-	/// <summary>
-	/// instantiate item and slot list.
-	/// </summary>
-	void Start(){
-		inventoryModel = this.gameObject.GetComponent<InventoryModel> ();
-		slotAmount = inventoryModel.slotsAmount; 
-		slots = new GameObject[slotAmount];
-
-		for (int i = 0; i < slotAmount; i++) {
-			slots [i] = Instantiate (inventorySlot);
-			slots [i].transform.SetParent (slotPanel.transform);
-		}
-
-	}
-		
-
-	public void updateAddNewItemView(Item itemToAdd, int amount = 1){
-
-		int emptySlotPointer = -1;
-		for (int i = 0; i < slotAmount; i++) { // Finding an empty slot
-			if (slots [i].transform.childCount == 0) { // Empty slot
-				emptySlotPointer = i;
-				break;
-			}
-		}
-
-		GameObject itemObj = Instantiate (inventoryItem, slots [emptySlotPointer].transform); // creates the itemView
-		itemObj.GetComponent<Image> ().sprite = itemToAdd.Sprite; // sets the sprite
-		itemObj.GetComponent<ItemData>().item = itemToAdd; // sets the item	
-		itemObj.transform.localPosition = Vector2.zero; // sets the position of the item according to the slot
-		itemObj.name = itemToAdd.Title; // sets the name of the gameObject
-		itemObj.transform.GetChild (0).GetComponent<Text> ().text = amount.ToString (); // sets the amount text
-
-		itemsData.Add (itemToAdd, emptySlotPointer); // Ads the itemData
-	}
-
-	public void updateAmountItemView(Item itemToUpdate, int amount = 1){
-		int slot = itemsData [itemToUpdate]; // Gets the item slot position
-		slots[slot].transform.GetChild (0).GetChild(0).GetComponent<Text> ().text = amount.ToString (); // updates the amount text
-	}
+    public GameObject inventoryPanel;
+    public GameObject slotPanel;
+    public GameObject inventorySlot;
+    public GameObject inventoryItem;
 
 
-	public void updateRemoveItemView(Item itemToRemove){
-		int slot = itemsData [itemToRemove]; // Gets the item slot position
-		Destroy (slots [slot].transform.GetChild (0).gameObject); // Destroy the item gameObject
 
-		itemsData.Remove(itemToRemove); // Removes the itemData
-	}
+    /// <summary>
+    /// The slot amount.
+    /// </summary>
+    public static int slotsAmount = 15;
 
-	public void updateMoveItemView(Item itemToMove, GameObject slotToFill){
-		int slotToTakePos = itemsData [itemToMove]; // Gets the item slot position
-		int slotToFillPos = -1;
+    private int freeSlot;
 
-		for (int i = 0; i < slotAmount; i++) { // Look for slotToFillPosition
-				if (slots[i].GetInstanceID() == slotToFill.GetInstanceID()){
-				slotToFillPos = i;
-				break;
-				}
-		}
-			
-		if (slotToFill.transform.childCount == 0) { // Empty Slot
-			slots [slotToTakePos].transform.GetChild (0).SetParent (slotToFill.transform); // Sets the parent of current itemToMove
-			itemsData [itemToMove] = slotToFillPos; // Adds a new itemsData
-		} else { // NotEmptySlot
-			Item itemToReplace = null;
-			foreach (Item key in itemsData.Keys)
-			{
-				if (itemsData [key] == slotToFillPos) {
-					itemToReplace = key;
-					break;
-				}
-			}
+    private InventoryModel inventoryModel;
 
-			slots [slotToTakePos].transform.GetChild (0).SetParent (slotToFill.transform); // Sets the parent of current itemToMove
-			slotToFill.transform.GetChild(0).position = slots[slotToTakePos].transform.position; // Sets the position of current itemToReplace
-			slotToFill.transform.GetChild (0).SetParent(slots[slotToTakePos].transform); // Sets the parent of current itemToReplace
+    /// <summary>
+    /// List of slots.
+    /// </summary>
+    public Slot[] slots;
 
-			itemsData [itemToMove] = slotToFillPos; // Updates informations about itemtomove slot
-			itemsData [itemToReplace] = slotToTakePos; // Updates informations about itemtoreplace slot
-		}
+    public int FreeSlot
+    {
+        get
+        {
+            return freeSlot;
+        }
 
-	}
+        set
+        {
+            freeSlot = value;
+        }
+    }
+
+    /// <summary>
+    /// which slots countains which item ? this allows the link between the models item and the view item.
+    /// </summary>
+    //public Dictionary<Item, int> itemsData = new Dictionary<Item, int>();
+
+    /// <summary>
+    /// instantiate item and slot list.
+    /// </summary>
+    void Start()
+    {
+        inventoryModel = this.gameObject.GetComponent<InventoryModel>();
+        // For now the nb of slots is hard-coded, most preferable option : Do some math to fix the size of each slot etc (not worth it 4 now)
+        //slotAmount = InventoryModel.slotsAmount;
+        freeSlot = slotsAmount;
+        slots = slotPanel.GetComponentsInChildren<Slot>(true);
+        //for (int i = 0; i < slotAmount; i++) {
+        //	slots [i] = Instantiate (inventorySlot);
+        //	slots [i].transform.SetParent (slotPanel.transform);
+        //}
+
+    }
+    /// <summary>
+    /// Check if a slot already got the item
+    /// </summary>
+    /// <param name="itemToCheck">The item searched</param>
+    /// <returns>The slot contenaing the item, null if none had it</returns>
+    private Slot getStackWithRoom(Item itemToCheck)
+    {
+        foreach (Slot slot in slots)
+        {
+            if (slot.hasItem(itemToCheck))
+                if (slot.hasSomeRoom())
+                    return slot;
+        }
+        return null;
+    }
+    /// <summary>
+    /// Return the first empty slot available
+    /// </summary>
+    /// <returns>The slot found, or null if none has been found</returns>
+    private Slot getEmptySlot()
+    {
+        foreach (Slot slot in slots)
+        {
+            if (slot.isEmpty())
+                return slot;
+        }
+        return null;
+    }
+
+    public bool hasFreeSlot()
+    {
+        return freeSlot > 0;
+    }
+
+    public void updateAddNewItemView(Item itemToAdd, int amount = 1)
+    {
+        if (amount > 0)
+        {
+            Slot slotToUse = null;
+            if (itemToAdd.StackSize > 0)
+                slotToUse = getStackWithRoom(itemToAdd);
+            else
+                slotToUse = getEmptySlot();
+            if (slotToUse == null && itemToAdd.StackSize > 0)
+                slotToUse = getEmptySlot();
+            if (slotToUse == null)
+                Debug.LogError("No empty slot found in the view. That shouldn't happen.");
+            else
+            {
+                //If the nb of item to add + the nb of item already in overflow the stack, then start a new stack with the overflow;
+                int remainingAmount = itemToAdd.stackSize - amount;
+                if (slotToUse.hasItem(itemToAdd))
+                    remainingAmount -= slotToUse.Amount;
+                if (remainingAmount > 0)
+                    amount = itemToAdd.stackSize;
+                if (slotToUse.hasItem(itemToAdd))
+                    amount -= slotToUse.Amount;
+                GameObject itemObj = Instantiate(inventoryItem, slotToUse.GetComponent<RectTransform>()); // creates the itemView
+
+                itemObj.GetComponent<Image>().sprite = itemToAdd.Sprite; // sets the sprite
+                itemObj.GetComponent<ItemData>().item = itemToAdd; // sets the item
+                RectTransform position = itemObj.GetComponent<RectTransform>();
+                position.offsetMin = new Vector2(1, 1);
+                position.offsetMax = new Vector2(1, 1);
+                position.localScale = new Vector3(1, 1, 1);
+                //itemObj.transform.localPosition = Vector2.zero; // sets the position of the item according to the slot
+                itemObj.name = itemToAdd.Title; // sets the name of the gameObject
+                itemObj.transform.GetChild(0).GetComponent<Text>().text = amount.ToString(); // sets the amount text
+                slotToUse.SetItem(itemObj.GetComponent<ItemData>() );
+                slotToUse.Amount = amount;
+                if (remainingAmount > 0)
+                    updateAddNewItemView(itemToAdd, remainingAmount);
+            }
+        }
+    }
+
+    public void updateAmountItemView(Item itemToUpdate, int amount = 1)
+    {
+        while (amount > 0)
+        {
+            Slot slot = findSlotWithItem(itemToUpdate);
+            if (slot == null)
+            {
+                Debug.LogWarning("Not enough items in view");
+            }
+            else
+            {
+                if (amount <= slot.Amount)
+                {
+                    if (amount == slot.Amount)
+                        slot.RemoveItem();
+                    else
+                        slot.Amount = slot.Amount - amount;
+                    amount = 0;
+                }
+                else
+                {
+                    amount -= slot.Amount;
+                    slot.RemoveItem();
+                }
+            }
+        }
+        //int slot = itemsData[itemToUpdate]; // Gets the item slot position
+        //slots[slot].transform.GetChild(0).GetChild(0).GetComponent<Text>().text = amount.ToString(); // updates the amount text
+    }
+
+    private Slot findSlotWithItem(Item itemToUpdate)
+    {
+        foreach (Slot slot in slots)
+        {
+            if (slot.hasItem(itemToUpdate))
+                return slot;
+        }
+        return null;
+    }
+
+    public void ClearSlot(Slot slot)
+    {
+        slot.RemoveItem();
+        freeSlot++;
+    }
+
+    public void updateRemoveItemView(Item itemToRemove)
+    {
+        Slot slot = null;
+        do
+        {
+            slot = findSlotWithItem(itemToRemove);
+            slot.RemoveItem();
+            freeSlot++;
+        } while (slot != null);
+    }
+
+    //public void updateMoveItemView(Item itemToMove, GameObject slotToFill)
+    //{
+    //    int slotToTakePos = itemsData[itemToMove]; // Gets the item slot position
+    //    int slotToFillPos = -1;
+
+    //    for (int i = 0; i < slotAmount; i++)
+    //    { // Look for slotToFillPosition
+    //        if (slots[i].GetInstanceID() == slotToFill.GetInstanceID())
+    //        {
+    //            slotToFillPos = i;
+    //            break;
+    //        }
+    //    }
+
+    //    if (slotToFill.transform.childCount == 0)
+    //    { // Empty Slot
+    //        slots[slotToTakePos].transform.GetChild(0).SetParent(slotToFill.transform); // Sets the parent of current itemToMove
+    //        itemsData[itemToMove] = slotToFillPos; // Adds a new itemsData
+    //    }
+    //    else
+    //    { // NotEmptySlot
+    //        Item itemToReplace = null;
+    //        foreach (Item key in itemsData.Keys)
+    //        {
+    //            if (itemsData[key] == slotToFillPos)
+    //            {
+    //                itemToReplace = key;
+    //                break;
+    //            }
+    //        }
+
+    //        slots[slotToTakePos].transform.GetChild(0).SetParent(slotToFill.transform); // Sets the parent of current itemToMove
+    //        slotToFill.transform.GetChild(0).position = slots[slotToTakePos].transform.position; // Sets the position of current itemToReplace
+    //        slotToFill.transform.GetChild(0).SetParent(slots[slotToTakePos].transform); // Sets the parent of current itemToReplace
+
+    //        itemsData[itemToMove] = slotToFillPos; // Updates informations about itemtomove slot
+    //        itemsData[itemToReplace] = slotToTakePos; // Updates informations about itemtoreplace slot
+    //    }
+
+    //}
 
 }
 
 
-	

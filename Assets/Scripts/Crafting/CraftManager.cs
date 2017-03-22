@@ -146,19 +146,19 @@ public class CraftManager : MonoBehaviour {
 			// Is there a free spot in the inventory ? 
 
 			bool isSpace = false;
-			if (inventory.Count < inventoryModel.slotsAmount) { // trying to figure out if there is space for the item to be created
+			if (inventory.Count < InventoryView.slotsAmount) { // trying to figure out if there is space for the item to be created
 				isSpace = true;
 			}
 
 			if (isSpace) { // There is space
 				
 				// Adds the product a productAmount of times 
-				inventoryController.addItem(productID,productAmount);
+				inventoryController.AddItem(productID,productAmount);
 
 				// Remove the components 
 
 				for (int k = 0; k < componentID.Length; k++) {// looping on the components
-					inventoryController.removeItem(componentID[k],componentAmount[k]);
+					inventoryController.RemoveItem(componentID[k],componentAmount[k]);
 				}
 			}
 		}

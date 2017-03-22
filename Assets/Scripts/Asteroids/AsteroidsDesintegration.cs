@@ -35,7 +35,7 @@ public class AsteroidsDesintegration : MonoBehaviour {
         {
             for (int i = 0; i < asm.mineralCount; i++)
             {
-				inventoryController.addItem(asm.id);
+				inventoryController.AddItem(asm.id);
             }
         }
 
