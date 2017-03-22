@@ -65,6 +65,10 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         if (item != null)
         { // there is an item 
+            RectTransform position = GetComponent<RectTransform>();
+            position.offsetMin = new Vector2(1, 1);
+            position.offsetMax = new Vector2(1, 1);
+            position.localScale = new Vector3(1, 1, 1);
             GetComponent<CanvasGroup>().blocksRaycasts = true;
         }
 

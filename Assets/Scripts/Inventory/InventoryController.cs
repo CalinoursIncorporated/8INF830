@@ -70,7 +70,7 @@ public class InventoryController : MonoBehaviour
                 model.Remove(itemToAdd);
             model.Add(itemToAdd,currentAmount + amount);
             // updates the view
-            inventoryView.updateAddNewItemView(itemToAdd, model[itemToAdd]);
+            inventoryView.updateAddNewItemView(itemToAdd, amount);
         }
         //    ////If one slot still have some room for the amount to add
         //    //if (inventory[itemToAdd] + amount % itemToAdd.StackSize > 0)

@@ -60,7 +60,7 @@ public class Slot : MonoBehaviour, IDropHandler
     /// </summary>
     public void RemoveItem()
     {
-        Destroy(item);
+        Destroy(item.gameObject);
         SetItem(null);
     }
 
@@ -78,7 +78,10 @@ public class Slot : MonoBehaviour, IDropHandler
             dragged.currentSlot.item = null;
             dragged.currentSlot = this;
             dragged.transform.SetParent(this.transform);
-            this.transform.position = Vector3.zero;
+            RectTransform position = dragged.GetComponent<RectTransform>();
+            position.offsetMin = new Vector2(1, 1);
+            position.offsetMax = new Vector2(1, 1);
+            position.localScale = new Vector3(1, 1, 1);
         }
     }
 

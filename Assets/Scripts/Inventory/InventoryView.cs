@@ -13,8 +13,6 @@ public class InventoryView : MonoBehaviour
     public GameObject inventorySlot;
     public GameObject inventoryItem;
 
-
-
     /// <summary>
     /// The slot amount.
     /// </summary>
@@ -102,24 +100,45 @@ public class InventoryView : MonoBehaviour
         if (amount > 0)
         {
             Slot slotToUse = null;
+            bool isNewSlot = false;
             if (itemToAdd.StackSize > 0)
                 slotToUse = getStackWithRoom(itemToAdd);
             else
+            {
                 slotToUse = getEmptySlot();
+                isNewSlot = true;
+            }
             if (slotToUse == null && itemToAdd.StackSize > 0)
+            {
                 slotToUse = getEmptySlot();
+                isNewSlot = true;
+            }
             if (slotToUse == null)
                 Debug.LogError("No empty slot found in the view. That shouldn't happen.");
             else
             {
                 //If the nb of item to add + the nb of item already in overflow the stack, then start a new stack with the overflow;
-                int remainingAmount = itemToAdd.stackSize - amount;
-                if (slotToUse.hasItem(itemToAdd))
-                    remainingAmount -= slotToUse.Amount;
-                if (remainingAmount > 0)
-                    amount = itemToAdd.stackSize;
-                if (slotToUse.hasItem(itemToAdd))
-                    amount -= slotToUse.Amount;
+                int stackCurrentAmount = 0;
+                int remainingAmount = 0;
+                if (isNewSlot)
+                    if (itemToAdd.StackSize > 0)
+                        stackCurrentAmount = Math.Min(amount, itemToAdd.StackSize);
+                    else
+                        stackCurrentAmount = amount;
+                else
+                {
+                    stackCurrentAmount = Math.Min(slotToUse.Amount + amount, itemToAdd.StackSize);
+                    //If the slot ain't empty, we erase the fancy picture for the new one. (No modification in the model :D)
+                    slotToUse.RemoveItem();
+                }
+                if (itemToAdd.StackSize > 0)
+                    remainingAmount = Math.Max(0, amount - stackCurrentAmount);
+                //if (slotToUse.hasItem(itemToAdd))
+                //    remainingAmount -= slotToUse.Amount;
+                //if (remainingAmount > 0)
+                //    amount = itemToAdd.stackSize;
+                //if (slotToUse.hasItem(itemToAdd))
+                //    amount -= slotToUse.Amount;
                 GameObject itemObj = Instantiate(inventoryItem, slotToUse.GetComponent<RectTransform>()); // creates the itemView
 
                 itemObj.GetComponent<Image>().sprite = itemToAdd.Sprite; // sets the sprite
@@ -130,9 +149,10 @@ public class InventoryView : MonoBehaviour
                 position.localScale = new Vector3(1, 1, 1);
                 //itemObj.transform.localPosition = Vector2.zero; // sets the position of the item according to the slot
                 itemObj.name = itemToAdd.Title; // sets the name of the gameObject
-                itemObj.transform.GetChild(0).GetComponent<Text>().text = amount.ToString(); // sets the amount text
-                slotToUse.SetItem(itemObj.GetComponent<ItemData>() );
-                slotToUse.Amount = amount;
+                itemObj.transform.GetChild(0).GetComponent<Text>().text = stackCurrentAmount.ToString(); // sets the amount text
+                itemObj.GetComponent<ItemData>().currentSlot = slotToUse;
+                slotToUse.SetItem(itemObj.GetComponent<ItemData>());
+                slotToUse.Amount = stackCurrentAmount;
                 if (remainingAmount > 0)
                     updateAddNewItemView(itemToAdd, remainingAmount);
             }
