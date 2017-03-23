@@ -17,25 +17,25 @@ public class InventoryController : MonoBehaviour
     private InventoryModel inventoryModel;
     private int freeSlot;
     private InventoryView inventoryView;
-    public int FreeSlot
-    {
-        get
-        {
-            return freeSlot;
-        }
+    //public int FreeSlot
+    //{
+    //    get
+    //    {
+    //        return freeSlot;
+    //    }
 
-        set
-        {
-            freeSlot = value;
-        }
-    }
+    //    set
+    //    {
+    //        freeSlot = value;
+    //    }
+    //}
 
     void Start()
     {
         database = ItemDatabase.Instance(itemJSON);
         inventoryModel = this.gameObject.GetComponent<InventoryModel>();
         inventoryView = this.gameObject.GetComponent<InventoryView>();
-        FreeSlot = InventoryView.slotsAmount;
+        //FreeSlot = inventoryView.slotsAmount;
     }
 
     public int GetQuantity(Item item)
@@ -68,7 +68,7 @@ public class InventoryController : MonoBehaviour
             int currentAmount = 0;
             if (model.TryGetValue(itemToAdd, out currentAmount))
                 model.Remove(itemToAdd);
-            model.Add(itemToAdd,currentAmount + amount);
+            model.Add(itemToAdd, currentAmount + amount);
             // updates the view
             inventoryView.updateAddNewItemView(itemToAdd, amount);
         }
@@ -97,6 +97,11 @@ public class InventoryController : MonoBehaviour
         //        inventoryView.updateAddNewItemView(itemToAdd, amount);
         //    }
         //}
+    }
+
+    public bool canItFit(int itemID, int amount)
+    {
+        return canItFit(database.FetchItemByID(itemID), amount);
     }
 
     private bool canItFit(Item itemToAdd, int amount)

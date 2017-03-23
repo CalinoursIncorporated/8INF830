@@ -16,7 +16,7 @@ public class InventoryView : MonoBehaviour
     /// <summary>
     /// The slot amount.
     /// </summary>
-    public static int slotsAmount = 15;
+    public int slotsAmount = 15;
 
     private int freeSlot;
 
