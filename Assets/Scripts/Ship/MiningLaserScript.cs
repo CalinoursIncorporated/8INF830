@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MiningLaserScript : MonoBehaviour {
 
@@ -10,9 +11,12 @@ public class MiningLaserScript : MonoBehaviour {
     ParticleSystem.EmissionModule em;
     public GameObject Particleprefab;
     public int range = 50;
+    public Slider HealthGauge;
+    public GameObject HealthGaugeText;
 
     void Start ()
     {
+        HealthGaugeText.SetActive(false);
         line = gameObject.GetComponent<LineRenderer>();
         line.enabled = false;
         particleObject = Instantiate(gameObject);
@@ -46,16 +50,19 @@ public class MiningLaserScript : MonoBehaviour {
             if (Physics.Raycast(miningray, out hit, range))
             {
                 line.SetPosition(1, hit.point);
-                AsteroidsDesintegration asscript = hit.transform.gameObject.GetComponent<AsteroidsDesintegration>();
+                Asteroid asscript = hit.transform.gameObject.GetComponent<Asteroid>();
                 if (asscript != null)
                 {
-                    asscript.health -= 1f;
+                    
+                    HealthGaugeText.SetActive(true);
+                    asscript.health -= 1;
+                    HealthGauge.value = asscript.health;
                     Debug.Log(asscript.health);
                     if (asscript.health <= 0)
                     {
                         GameObject Particle = Instantiate(Particleprefab, hit.point, Random.rotation);
                         Particle.transform.localScale = asscript.transform.localScale;
-                        Destroy(Particle,2000);
+                        Destroy(Particle,2);
                     }
                 }
                 
@@ -65,6 +72,7 @@ public class MiningLaserScript : MonoBehaviour {
             else
             {
                 line.SetPosition(1, miningray.GetPoint(range));
+                HealthGaugeText.SetActive(false);
                 em.enabled = false;
             }
 
@@ -72,6 +80,7 @@ public class MiningLaserScript : MonoBehaviour {
             yield return null;
         }
 
+        HealthGaugeText.SetActive(false);
         line.enabled = false;
         em.enabled = false;
     }
