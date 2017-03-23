@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class InventoryMenuClick : MonoBehaviour
 {
-
+    public bool isOpenOnStart = false;
     // Use this for initialization
     void Start()
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(isOpenOnStart);
     }
 
     /// <summary>
