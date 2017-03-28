@@ -23,6 +23,8 @@ public class UpgradeManagement : MonoBehaviour
     private static int attackPoints = 0;
     private static int mobilityPoints = 0;
 
+    private InventoryController invControl;
+
     #endregion
 
     public void Start()
@@ -34,12 +36,12 @@ public class UpgradeManagement : MonoBehaviour
         GameObject fireRateGauge = GameObject.Find("FireRateUpgradeGauge");
         GameObject topSpeedGauge = GameObject.Find("TopSpeedUpgradeGauge");
         GameObject handlingGauge = GameObject.Find("HandlingUpgradeGauge");
-        defensePoints = GameObject.Find("Inventory").GetComponent<InventoryController>().GetQuantity(200);
-        GameObject.Find("DefenseCounter").GetComponent<Text>().text = defensePoints.ToString();
-        attackPoints = GameObject.Find("Inventory").GetComponent<InventoryController>().GetQuantity(201);
-        GameObject.Find("AttackCounter").GetComponent<Text>().text = attackPoints.ToString();
-        mobilityPoints = GameObject.Find("Inventory").GetComponent<InventoryController>().GetQuantity(202);
-        GameObject.Find("MobilityCounter").GetComponent<Text>().text = mobilityPoints.ToString();
+        invControl = GameObject.Find("ShipInventoryC").GetComponent<InventoryController>();
+        if(invControl == null )
+        {
+            Debug.Log("nOt good");
+        }
+        upgradeUpgradeCount();
 
         stats = GameObject.Find("Stats").GetComponent<ShipStats>();
         foreach (Transform child in healthGauge.transform)
@@ -147,6 +149,17 @@ public class UpgradeManagement : MonoBehaviour
             }
         }
         #endregion
+    }
+
+    private void upgradeUpgradeCount()
+    {
+       
+        defensePoints = invControl.GetQuantity(200);
+        GameObject.Find("DefenseCounter").GetComponent<Text>().text = defensePoints.ToString();
+        attackPoints = invControl.GetQuantity(201);
+        GameObject.Find("AttackCounter").GetComponent<Text>().text = attackPoints.ToString();
+        mobilityPoints = invControl.GetQuantity(202);
+        GameObject.Find("MobilityCounter").GetComponent<Text>().text = mobilityPoints.ToString();
     }
 
     #region Button click functions (update the values of the ship's stats)
@@ -371,6 +384,14 @@ public class UpgradeManagement : MonoBehaviour
         stats.fireRateStat += fireRateUp;
         stats.topSppedStat += topSpeedUp;
         stats.handlingStat += handlingUp;
+
+        invControl.RemoveItem(200, (healthUp + armorUp));
+        invControl.RemoveItem(201, (damageUp + fireRateUp));
+        invControl.RemoveItem(202, (topSpeedUp + handlingUp));
+
+        upgradeUpgradeCount();
+
+
         foreach (GameObject grad in healthGaugeGrads)
         {
             if (grad.GetComponent<RawImage>().color == Color.yellow)
