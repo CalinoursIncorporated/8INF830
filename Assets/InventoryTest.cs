@@ -20,6 +20,7 @@ public class InventoryTest : MonoBehaviour {
     {
         invCtrl.AddItem(200, 5);
         invCtrl.AddItem(201, 3);
+        invCtrl.AddItem(202, 3);
 
         invCtrl.AddItem(210, 3);
         invCtrl.AddItem(211, 3);
