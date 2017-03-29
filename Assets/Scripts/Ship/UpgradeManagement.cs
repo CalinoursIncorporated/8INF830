@@ -23,7 +23,7 @@ public class UpgradeManagement : MonoBehaviour
     private static int attackPoints = 0;
     private static int mobilityPoints = 0;
 
-    private InventoryController invControl;
+    public InventoryController inventoryController;
 
     #endregion
 
@@ -36,10 +36,10 @@ public class UpgradeManagement : MonoBehaviour
         GameObject fireRateGauge = GameObject.Find("FireRateUpgradeGauge");
         GameObject topSpeedGauge = GameObject.Find("TopSpeedUpgradeGauge");
         GameObject handlingGauge = GameObject.Find("HandlingUpgradeGauge");
-        invControl = GameObject.Find("ShipInventoryC").GetComponent<InventoryController>();
-        if(invControl == null )
+        //inventoryController = GameObject.Find("ShipInventoryC").GetComponent<InventoryController>();
+        if(inventoryController == null )
         {
-            Debug.Log("nOt good");
+            Debug.LogError("InventoryController not attached !", this);
         }
         upgradeUpgradeCount();
 
@@ -154,11 +154,11 @@ public class UpgradeManagement : MonoBehaviour
     private void upgradeUpgradeCount()
     {
        
-        defensePoints = invControl.GetQuantity(200);
+        defensePoints = inventoryController.GetQuantity(200);
         GameObject.Find("DefenseCounter").GetComponent<Text>().text = defensePoints.ToString();
-        attackPoints = invControl.GetQuantity(201);
+        attackPoints = inventoryController.GetQuantity(201);
         GameObject.Find("AttackCounter").GetComponent<Text>().text = attackPoints.ToString();
-        mobilityPoints = invControl.GetQuantity(202);
+        mobilityPoints = inventoryController.GetQuantity(202);
         GameObject.Find("MobilityCounter").GetComponent<Text>().text = mobilityPoints.ToString();
     }
 
@@ -385,9 +385,9 @@ public class UpgradeManagement : MonoBehaviour
         stats.topSppedStat += topSpeedUp;
         stats.handlingStat += handlingUp;
 
-        invControl.RemoveItem(200, (healthUp + armorUp));
-        invControl.RemoveItem(201, (damageUp + fireRateUp));
-        invControl.RemoveItem(202, (topSpeedUp + handlingUp));
+        inventoryController.RemoveItem(200, (healthUp + armorUp));
+        inventoryController.RemoveItem(201, (damageUp + fireRateUp));
+        inventoryController.RemoveItem(202, (topSpeedUp + handlingUp));
 
         upgradeUpgradeCount();
 

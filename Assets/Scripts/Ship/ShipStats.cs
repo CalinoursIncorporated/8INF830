@@ -11,21 +11,21 @@ public class ShipStats : MonoBehaviour
     public int topSppedStat;
     public int handlingStat;
 
-    void Awake()
-    {
-        if (!AlreadyPresent())
-        {
-            DontDestroyOnLoad(this);
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
+    //void Awake()
+    //{
+    //    if (!AlreadyPresent())
+    //    {
+    //        DontDestroyOnLoad(this.gameObject);
+    //    }
+    //    else
+    //    {
+    //        Destroy(this);
+    //    }
+    //}
 
-    private bool AlreadyPresent()
-    {
-        ShipStats[] Ts = FindObjectsOfType<ShipStats>();
-        return Ts.Length > 1;
-    }
+    //private bool AlreadyPresent()
+    //{
+    //    ShipStats[] Ts = FindObjectsOfType<ShipStats>();
+    //    return Ts.Length > 1;
+    //}
 }

@@ -23,7 +23,7 @@ public class BaseUpgradeManager : MonoBehaviour
     private static int attackPoints = 0;
     private static int mobilityPoints = 0;
 
-    private InventoryController invControl;
+    public InventoryController inventoryController;
 
     #endregion
 
@@ -36,12 +36,12 @@ public class BaseUpgradeManager : MonoBehaviour
         GameObject fireRateGauge = GameObject.Find("FireRateUpgradeGauge");
         GameObject topSpeedGauge = GameObject.Find("TopSpeedUpgradeGauge");
         GameObject handlingGauge = GameObject.Find("HandlingUpgradeGauge");
-        invControl = GameObject.Find("ShipInventoryC").GetComponent<InventoryController>();
-        if (invControl == null)
+        //invControl = GameObject.Find("ShipInventoryC").GetComponent<InventoryController>();
+        if (inventoryController == null)
         {
-            Debug.Log("nOt good");
+            Debug.LogError("InventoryController not attached !", this);
         }
-        upgradeUpgradeCount();
+        UpdateUpgradeCount();
 
         stats = GameObject.Find("Stats").GetComponent<BaseStats>();
         foreach (Transform child in healthGauge.transform)
@@ -151,14 +151,14 @@ public class BaseUpgradeManager : MonoBehaviour
         #endregion
     }
 
-    private void upgradeUpgradeCount()
+    private void UpdateUpgradeCount()
     {
 
-        defensePoints = invControl.GetQuantity(210);
+        defensePoints = inventoryController.GetQuantity(210);
         GameObject.Find("DefenseCounter").GetComponent<Text>().text = defensePoints.ToString();
-        attackPoints = invControl.GetQuantity(211);
+        attackPoints = inventoryController.GetQuantity(211);
         GameObject.Find("AttackCounter").GetComponent<Text>().text = attackPoints.ToString();
-        mobilityPoints = invControl.GetQuantity(212);
+        mobilityPoints = inventoryController.GetQuantity(212);
         GameObject.Find("MobilityCounter").GetComponent<Text>().text = mobilityPoints.ToString();
     }
     
@@ -374,7 +374,7 @@ public class BaseUpgradeManager : MonoBehaviour
     }
     #endregion
 
-    #region Upgrade Validation/cancelation buttons and functions.
+    #region Upgrade validate/cancel buttons and functions.
 
     public void Validate()
     {
@@ -385,11 +385,11 @@ public class BaseUpgradeManager : MonoBehaviour
         stats.shieldStat += topSpeedUp;
         stats.chargeStat += handlingUp;
 
-        invControl.RemoveItem(210, (healthUp + armorUp));
-        invControl.RemoveItem(211, (damageUp + fireRateUp));
-        invControl.RemoveItem(212, (topSpeedUp + handlingUp));
+        inventoryController.RemoveItem(210, (healthUp + armorUp));
+        inventoryController.RemoveItem(211, (damageUp + fireRateUp));
+        inventoryController.RemoveItem(212, (topSpeedUp + handlingUp));
 
-        upgradeUpgradeCount();
+        UpdateUpgradeCount();
 
 
         foreach (GameObject grad in healthGaugeGrads)
