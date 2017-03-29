@@ -386,7 +386,6 @@ public class BaseUpgradeManager : MonoBehaviour
     }
     public void Validate()
     {
-        //ResetTmpCounters();
 
         stats.scanRangeStat += scanRangeStat;
         stats.printerStat += printerStat;
@@ -399,6 +398,7 @@ public class BaseUpgradeManager : MonoBehaviour
         inventoryController.RemoveItem(211, (numberDronesStat + fireDroneStat));
         inventoryController.RemoveItem(212, (shieldStat + chargeStat));
 
+        ResetTmpCounters();
         UpdateUpgradeCount();
 
 

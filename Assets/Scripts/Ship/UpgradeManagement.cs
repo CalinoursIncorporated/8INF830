@@ -388,8 +388,8 @@ public class UpgradeManagement : MonoBehaviour
         inventoryController.RemoveItem(200, (healthUp + armorUp));
         inventoryController.RemoveItem(201, (damageUp + fireRateUp));
         inventoryController.RemoveItem(202, (topSpeedUp + handlingUp));
-        ResetTmpCounters();
 
+        ResetTmpCounters();
         UpdateUpgradeCount();
 
 
