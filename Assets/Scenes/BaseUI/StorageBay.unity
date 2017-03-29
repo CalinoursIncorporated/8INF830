@@ -1868,17 +1868,17 @@ Prefab:
     - target: {fileID: 224763496680975246, guid: 39c9f6d39c26a6b439a506348a3c0c45,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -15.001262
       objectReference: {fileID: 0}
     - target: {fileID: 224763496680975246, guid: 39c9f6d39c26a6b439a506348a3c0c45,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 16.002523
       objectReference: {fileID: 0}
     - target: {fileID: 224244054079968060, guid: 39c9f6d39c26a6b439a506348a3c0c45,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30.002523
       objectReference: {fileID: 0}
     - target: {fileID: 224302789474726142, guid: 39c9f6d39c26a6b439a506348a3c0c45,
         type: 2}
@@ -2083,17 +2083,17 @@ Prefab:
     - target: {fileID: 224692638585068196, guid: 108eba55f827b724d9fe114b620f258e,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -15.001262
       objectReference: {fileID: 0}
     - target: {fileID: 224692638585068196, guid: 108eba55f827b724d9fe114b620f258e,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 16.002523
       objectReference: {fileID: 0}
     - target: {fileID: 224388868174261006, guid: 108eba55f827b724d9fe114b620f258e,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30.002523
       objectReference: {fileID: 0}
     - target: {fileID: 224003018082405240, guid: 108eba55f827b724d9fe114b620f258e,
         type: 2}
@@ -2768,6 +2768,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224003018082405240, guid: 108eba55f827b724d9fe114b620f258e,
     type: 2}
   m_PrefabInternal: {fileID: 608521095}
+--- !u!114 &608521097 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114852623332110586, guid: 108eba55f827b724d9fe114b620f258e,
+    type: 2}
+  m_PrefabInternal: {fileID: 608521095}
+  m_Script: {fileID: 11500000, guid: e73b5f04877a6499fb26ae8b5037290e, type: 3}
 --- !u!1001 &619594085
 Prefab:
   m_ObjectHideFlags: 0
@@ -3293,12 +3299,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224302789474726142, guid: 39c9f6d39c26a6b439a506348a3c0c45,
     type: 2}
   m_PrefabInternal: {fileID: 510419344}
---- !u!114 &1272319842 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114240676123302876, guid: 39c9f6d39c26a6b439a506348a3c0c45,
-    type: 2}
-  m_PrefabInternal: {fileID: 510419344}
-  m_Script: {fileID: 11500000, guid: e73b5f04877a6499fb26ae8b5037290e, type: 3}
 --- !u!1 &1296304494 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1057890647353140, guid: 2653d05272ebf334c9c973cf53fe482d,
@@ -3416,7 +3416,7 @@ Prefab:
         type: 2}
       propertyPath: inventoryController
       value: 
-      objectReference: {fileID: 1272319842}
+      objectReference: {fileID: 608521097}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 990f62e65c8707f418f8f3ac1e2eb935, type: 2}
   m_IsPrefabParent: 0
