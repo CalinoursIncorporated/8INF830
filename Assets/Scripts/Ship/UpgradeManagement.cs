@@ -13,15 +13,15 @@ public class UpgradeManagement : MonoBehaviour
     private List<GameObject> topSpeedGaugeGrads = new List<GameObject>();
     private List<GameObject> handlingGaugeGrads = new List<GameObject>();
     private ShipStats stats;
-    private static int healthUp = 0;
-    private static int armorUp = 0;
-    private static int damageUp = 0;
-    private static int fireRateUp = 0;
-    private static int topSpeedUp = 0;
-    private static int handlingUp = 0;
-    private static int defensePoints = 0;
-    private static int attackPoints = 0;
-    private static int mobilityPoints = 0;
+    private /*static*/ int healthUp = 0;
+    private /*static*/ int armorUp = 0;
+    private /*static*/ int damageUp = 0;
+    private /*static*/ int fireRateUp = 0;
+    private /*static*/ int topSpeedUp = 0;
+    private /*static*/ int handlingUp = 0;
+    private /*static*/ int defensePoints = 0;
+    private /*static*/ int attackPoints = 0;
+    private /*static*/ int mobilityPoints = 0;
 
     public InventoryController inventoryController;
 
@@ -41,7 +41,7 @@ public class UpgradeManagement : MonoBehaviour
         {
             Debug.LogError("InventoryController not attached !", this);
         }
-        upgradeUpgradeCount();
+        UpdateUpgradeCount();
 
         stats = GameObject.Find("Stats").GetComponent<ShipStats>();
         foreach (Transform child in healthGauge.transform)
@@ -124,7 +124,7 @@ public class UpgradeManagement : MonoBehaviour
         }
         foreach (GameObject grad in topSpeedGaugeGrads)
         {
-            if (i < stats.topSppedStat)
+            if (i < stats.topSpeed)
             {
                 grad.GetComponent<RawImage>().color = Color.green;
                 i++;
@@ -151,7 +151,7 @@ public class UpgradeManagement : MonoBehaviour
         #endregion
     }
 
-    private void upgradeUpgradeCount()
+    private void UpdateUpgradeCount()
     {
        
         defensePoints = inventoryController.GetQuantity(200);
@@ -311,14 +311,14 @@ public class UpgradeManagement : MonoBehaviour
             GameObject.Find("MobilityCounter").GetComponent<Text>().text = mobilityPoints.ToString();
             topSpeedUp += 1;
             int i = 0;
-            if (stats.topSppedStat + topSpeedUp >= 5)
+            if (stats.topSpeed + topSpeedUp >= 5)
             {
-                topSpeedUp = 5 - stats.topSppedStat;
+                topSpeedUp = 5 - stats.topSpeed;
                 mobilityPoints++;
             }
             foreach (GameObject grad in topSpeedGaugeGrads)
             {
-                if (i < topSpeedUp + stats.topSppedStat)
+                if (i < topSpeedUp + stats.topSpeed)
                 {
                     if (grad.GetComponent<RawImage>().color == Color.white)
                     {
@@ -369,7 +369,7 @@ public class UpgradeManagement : MonoBehaviour
         }       
         else
         {
-            Debug.Log("Not enough mobility upgrade kits !");
+            Debug.Log("Not enough mobility grade kits !");
         }
     }
     #endregion
@@ -382,14 +382,15 @@ public class UpgradeManagement : MonoBehaviour
         stats.armorStat += armorUp;
         stats.damageStat += damageUp;
         stats.fireRateStat += fireRateUp;
-        stats.topSppedStat += topSpeedUp;
+        stats.topSpeed += topSpeedUp;
         stats.handlingStat += handlingUp;
+        ResetTmpCounters();
 
         inventoryController.RemoveItem(200, (healthUp + armorUp));
         inventoryController.RemoveItem(201, (damageUp + fireRateUp));
         inventoryController.RemoveItem(202, (topSpeedUp + handlingUp));
 
-        upgradeUpgradeCount();
+        UpdateUpgradeCount();
 
 
         foreach (GameObject grad in healthGaugeGrads)
@@ -436,14 +437,19 @@ public class UpgradeManagement : MonoBehaviour
         }
     }
 
-    public void Cancel()
+    private void ResetTmpCounters()
     {
         healthUp = 0;
         armorUp = 0;
         damageUp = 0;
         fireRateUp = 0;
-        topSpeedUp = 0;
         handlingUp = 0;
+        topSpeedUp = 0;
+    }
+
+    public void Cancel()
+    {
+        ResetTmpCounters();
         GameObject.Find("DefenseCounter").GetComponent<Text>().text = defensePoints.ToString();
         GameObject.Find("AttackCounter").GetComponent<Text>().text = attackPoints.ToString();
         GameObject.Find("MobilityCounter").GetComponent<Text>().text = mobilityPoints.ToString();

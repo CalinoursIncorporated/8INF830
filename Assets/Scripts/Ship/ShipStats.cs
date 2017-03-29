@@ -8,7 +8,7 @@ public class ShipStats : MonoBehaviour
     public int armorStat;
     public int damageStat;
     public int fireRateStat;
-    public int topSppedStat;
+    public int topSpeed;
     public int handlingStat;
 
     //void Awake()
