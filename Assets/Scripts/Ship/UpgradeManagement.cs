@@ -384,11 +384,11 @@ public class UpgradeManagement : MonoBehaviour
         stats.fireRateStat += fireRateUp;
         stats.topSpeed += topSpeedUp;
         stats.handlingStat += handlingUp;
-        ResetTmpCounters();
 
         inventoryController.RemoveItem(200, (healthUp + armorUp));
         inventoryController.RemoveItem(201, (damageUp + fireRateUp));
         inventoryController.RemoveItem(202, (topSpeedUp + handlingUp));
+        ResetTmpCounters();
 
         UpdateUpgradeCount();
 
@@ -450,6 +450,7 @@ public class UpgradeManagement : MonoBehaviour
     public void Cancel()
     {
         ResetTmpCounters();
+        UpdateUpgradeCount();
         GameObject.Find("DefenseCounter").GetComponent<Text>().text = defensePoints.ToString();
         GameObject.Find("AttackCounter").GetComponent<Text>().text = attackPoints.ToString();
         GameObject.Find("MobilityCounter").GetComponent<Text>().text = mobilityPoints.ToString();

@@ -13,15 +13,15 @@ public class BaseUpgradeManager : MonoBehaviour
     private List<GameObject> topSpeedGaugeGrads = new List<GameObject>();
     private List<GameObject> handlingGaugeGrads = new List<GameObject>();
     private BaseStats stats;
-    private static int healthUp = 0;
-    private static int armorUp = 0;
-    private static int damageUp = 0;
-    private static int fireRateUp = 0;
-    private static int topSpeedUp = 0;
-    private static int handlingUp = 0;
-    private static int defensePoints = 0;
-    private static int attackPoints = 0;
-    private static int mobilityPoints = 0;
+    private /*static*/ int scanRangeStat = 0;
+    private /*static*/ int printerStat = 0;
+    private /*static*/ int numberDronesStat = 0;
+    private /*static*/ int fireDroneStat = 0;
+    private /*static*/ int shieldStat = 0;
+    private /*static*/ int chargeStat = 0;
+    private /*static*/ int basePoints = 0;
+    private /*static*/ int dronesPoints = 0;
+    private /*static*/ int shieldPoints = 0;
 
     public InventoryController inventoryController;
 
@@ -154,31 +154,31 @@ public class BaseUpgradeManager : MonoBehaviour
     private void UpdateUpgradeCount()
     {
 
-        defensePoints = inventoryController.GetQuantity(210);
-        GameObject.Find("DefenseCounter").GetComponent<Text>().text = defensePoints.ToString();
-        attackPoints = inventoryController.GetQuantity(211);
-        GameObject.Find("AttackCounter").GetComponent<Text>().text = attackPoints.ToString();
-        mobilityPoints = inventoryController.GetQuantity(212);
-        GameObject.Find("MobilityCounter").GetComponent<Text>().text = mobilityPoints.ToString();
+        basePoints = inventoryController.GetQuantity(210);
+        GameObject.Find("DefenseCounter").GetComponent<Text>().text = basePoints.ToString();
+        dronesPoints = inventoryController.GetQuantity(211);
+        GameObject.Find("AttackCounter").GetComponent<Text>().text = dronesPoints.ToString();
+        shieldPoints = inventoryController.GetQuantity(212);
+        GameObject.Find("MobilityCounter").GetComponent<Text>().text = shieldPoints.ToString();
     }
-    
+
     #region Button click functions (update the values of the ship's stats)
     public void HealthUpgrade()
     {
-        if (defensePoints > 0)
+        if (basePoints > 0)
         {
-            defensePoints--;
-            GameObject.Find("DefenseCounter").GetComponent<Text>().text = defensePoints.ToString();
-            healthUp += 1;
+            basePoints--;
+            GameObject.Find("DefenseCounter").GetComponent<Text>().text = basePoints.ToString();
+            scanRangeStat += 1;
             int i = 0;
-            if (stats.scanRangeStat + healthUp > 5)
+            if (stats.scanRangeStat + scanRangeStat > 5)
             {
-                healthUp = 5 - stats.scanRangeStat;
-                defensePoints++;
+                scanRangeStat = 5 - stats.scanRangeStat;
+                basePoints++;
             }
             foreach (GameObject grad in healthGaugeGrads)
             {
-                if (i < healthUp + stats.scanRangeStat)
+                if (i < scanRangeStat + stats.scanRangeStat)
                 {
                     if (grad.GetComponent<RawImage>().color == Color.white)
                     {
@@ -200,20 +200,20 @@ public class BaseUpgradeManager : MonoBehaviour
 
     public void ArmorUpgrade()
     {
-        if (defensePoints > 0)
+        if (basePoints > 0)
         {
-            defensePoints--;
-            armorUp += 1;
-            GameObject.Find("DefenseCounter").GetComponent<Text>().text = defensePoints.ToString();
+            basePoints--;
+            printerStat += 1;
+            GameObject.Find("DefenseCounter").GetComponent<Text>().text = basePoints.ToString();
             int i = 0;
-            if (stats.printerStat + armorUp >= 5)
+            if (stats.printerStat + printerStat >= 5)
             {
-                armorUp = 5 - stats.printerStat;
-                defensePoints++;
+                printerStat = 5 - stats.printerStat;
+                basePoints++;
             }
             foreach (GameObject grad in armorGaugeGrads)
             {
-                if (i < armorUp + stats.printerStat)
+                if (i < printerStat + stats.printerStat)
                 {
                     if (grad.GetComponent<RawImage>().color == Color.white)
                     {
@@ -235,20 +235,20 @@ public class BaseUpgradeManager : MonoBehaviour
 
     public void DamageUpgrade()
     {
-        if (attackPoints > 0)
+        if (dronesPoints > 0)
         {
-            attackPoints--;
-            GameObject.Find("AttackCounter").GetComponent<Text>().text = attackPoints.ToString();
-            damageUp += 1;
+            dronesPoints--;
+            GameObject.Find("AttackCounter").GetComponent<Text>().text = dronesPoints.ToString();
+            numberDronesStat += 1;
             int i = 0;
-            if (stats.numberDronesStat + damageUp >= 5)
+            if (stats.numberDronesStat + numberDronesStat >= 5)
             {
-                damageUp = 5 - stats.numberDronesStat;
-                attackPoints++;
+                numberDronesStat = 5 - stats.numberDronesStat;
+                dronesPoints++;
             }
             foreach (GameObject grad in damageGaugeGrads)
             {
-                if (i < damageUp + stats.numberDronesStat)
+                if (i < numberDronesStat + stats.numberDronesStat)
                 {
                     if (grad.GetComponent<RawImage>().color == Color.white)
                     {
@@ -270,20 +270,20 @@ public class BaseUpgradeManager : MonoBehaviour
 
     public void FireRateUpgrade()
     {
-        if (attackPoints > 0)
+        if (dronesPoints > 0)
         {
-            attackPoints--;
-            GameObject.Find("AttackCounter").GetComponent<Text>().text = attackPoints.ToString();
-            fireRateUp += 1;
+            dronesPoints--;
+            GameObject.Find("AttackCounter").GetComponent<Text>().text = dronesPoints.ToString();
+            fireDroneStat += 1;
             int i = 0;
-            if (stats.fireDroneStat + fireRateUp >= 5)
+            if (stats.fireDroneStat + fireDroneStat >= 5)
             {
-                fireRateUp = 5 - stats.fireDroneStat;
-                attackPoints++;
+                fireDroneStat = 5 - stats.fireDroneStat;
+                dronesPoints++;
             }
             foreach (GameObject grad in fireRateGaugeGrads)
             {
-                if (i < fireRateUp + stats.fireDroneStat)
+                if (i < fireDroneStat + stats.fireDroneStat)
                 {
                     if (grad.GetComponent<RawImage>().color == Color.white)
                     {
@@ -305,20 +305,20 @@ public class BaseUpgradeManager : MonoBehaviour
 
     public void TopSpeedUpgrade()
     {
-        if (mobilityPoints > 0)
+        if (shieldPoints > 0)
         {
-            mobilityPoints--;
-            GameObject.Find("MobilityCounter").GetComponent<Text>().text = mobilityPoints.ToString();
-            topSpeedUp += 1;
+            shieldPoints--;
+            GameObject.Find("MobilityCounter").GetComponent<Text>().text = shieldPoints.ToString();
+            shieldStat += 1;
             int i = 0;
-            if (stats.shieldStat + topSpeedUp >= 5)
+            if (stats.shieldStat + shieldStat >= 5)
             {
-                topSpeedUp = 5 - stats.shieldStat;
-                mobilityPoints++;
+                shieldStat = 5 - stats.shieldStat;
+                shieldPoints++;
             }
             foreach (GameObject grad in topSpeedGaugeGrads)
             {
-                if (i < topSpeedUp + stats.shieldStat)
+                if (i < shieldStat + stats.shieldStat)
                 {
                     if (grad.GetComponent<RawImage>().color == Color.white)
                     {
@@ -340,20 +340,20 @@ public class BaseUpgradeManager : MonoBehaviour
 
     public void HandlingUpgrade()
     {
-        if (mobilityPoints > 0)
+        if (shieldPoints > 0)
         {
-            mobilityPoints--;
-            GameObject.Find("MobilityCounter").GetComponent<Text>().text = mobilityPoints.ToString();
-            handlingUp += 1;
+            shieldPoints--;
+            GameObject.Find("MobilityCounter").GetComponent<Text>().text = shieldPoints.ToString();
+            chargeStat += 1;
             int i = 0;
-            if (stats.chargeStat + handlingUp >= 5)
+            if (stats.chargeStat + chargeStat >= 5)
             {
-                handlingUp = 5 - stats.chargeStat;
-                mobilityPoints++;
+                chargeStat = 5 - stats.chargeStat;
+                shieldPoints++;
             }
             foreach (GameObject grad in handlingGaugeGrads)
             {
-                if (i < handlingUp + stats.chargeStat)
+                if (i < chargeStat + stats.chargeStat)
                 {
                     if (grad.GetComponent<RawImage>().color == Color.white)
                     {
@@ -375,19 +375,29 @@ public class BaseUpgradeManager : MonoBehaviour
     #endregion
 
     #region Upgrade validate/cancel buttons and functions.
-
+    private void ResetTmpCounters()
+    {
+        scanRangeStat = 0;
+        printerStat = 0;
+        numberDronesStat = 0;
+        fireDroneStat = 0;
+        chargeStat = 0;
+        shieldStat = 0;
+    }
     public void Validate()
     {
-        stats.scanRangeStat += healthUp;
-        stats.printerStat += armorUp;
-        stats.numberDronesStat += damageUp;
-        stats.fireDroneStat += fireRateUp;
-        stats.shieldStat += topSpeedUp;
-        stats.chargeStat += handlingUp;
+        //ResetTmpCounters();
 
-        inventoryController.RemoveItem(210, (healthUp + armorUp));
-        inventoryController.RemoveItem(211, (damageUp + fireRateUp));
-        inventoryController.RemoveItem(212, (topSpeedUp + handlingUp));
+        stats.scanRangeStat += scanRangeStat;
+        stats.printerStat += printerStat;
+        stats.numberDronesStat += numberDronesStat;
+        stats.fireDroneStat += fireDroneStat;
+        stats.shieldStat += shieldStat;
+        stats.chargeStat += chargeStat;
+
+        inventoryController.RemoveItem(210, (scanRangeStat + printerStat));
+        inventoryController.RemoveItem(211, (numberDronesStat + fireDroneStat));
+        inventoryController.RemoveItem(212, (shieldStat + chargeStat));
 
         UpdateUpgradeCount();
 
@@ -438,15 +448,11 @@ public class BaseUpgradeManager : MonoBehaviour
 
     public void Cancel()
     {
-        healthUp = 0;
-        armorUp = 0;
-        damageUp = 0;
-        fireRateUp = 0;
-        topSpeedUp = 0;
-        handlingUp = 0;
-        GameObject.Find("DefenseCounter").GetComponent<Text>().text = defensePoints.ToString();
-        GameObject.Find("AttackCounter").GetComponent<Text>().text = attackPoints.ToString();
-        GameObject.Find("MobilityCounter").GetComponent<Text>().text = mobilityPoints.ToString();
+        ResetTmpCounters();
+        UpdateUpgradeCount();
+        GameObject.Find("DefenseCounter").GetComponent<Text>().text = basePoints.ToString();
+        GameObject.Find("AttackCounter").GetComponent<Text>().text = dronesPoints.ToString();
+        GameObject.Find("MobilityCounter").GetComponent<Text>().text = shieldPoints.ToString();
         foreach (GameObject grad in healthGaugeGrads)
         {
             if (grad.GetComponent<RawImage>().color == Color.yellow)
