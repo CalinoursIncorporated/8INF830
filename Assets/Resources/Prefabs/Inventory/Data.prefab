@@ -146,7 +146,7 @@ MonoBehaviour:
   armorStat: 0
   damageStat: 0
   fireRateStat: 0
-  topSppedStat: 0
+  topSpeed: 0
   handlingStat: 0
 --- !u!114 &114081171758144220
 MonoBehaviour:
