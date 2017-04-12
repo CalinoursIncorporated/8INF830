@@ -35,6 +35,15 @@ public class PlayerMovement : MonoBehaviour
     public GameObject warpGauge;
     private Slider warpSlider;
 
+	public AudioClip warpSound;
+	public AudioClip warpedSound;
+
+	private AudioSource audioSource;
+
+	void Awake(){
+		audioSource = GetComponent<AudioSource>();
+	}
+
     // Use this for initialization
     void Start()
     {
@@ -88,16 +97,20 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetAxis("Jump") > 0)
         {
+			audioSource.PlayOneShot (warpSound);
             warpGauge.SetActive(true);
             actualLoading += Time.deltaTime;
             warpSlider.value = (actualLoading / warpTime);
+
             if (actualLoading >= warpTime)
             {
                 SceneManager.LoadSceneAsync("SystemMap", LoadSceneMode.Single);
+				audioSource.PlayOneShot (warpedSound);
             }
         }
         else
         {
+			audioSource.Stop ();
             actualLoading = 0;
             warpGauge.SetActive(false);
         }

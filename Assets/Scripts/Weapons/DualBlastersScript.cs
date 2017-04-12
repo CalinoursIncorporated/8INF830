@@ -17,9 +17,14 @@ public class DualBlastersScript : MonoBehaviour {
     public GameObject Gauge;
     
     public GameObject Particleprefab;
+	public AudioClip shotSound;
 
     private float lastShot;
+	private AudioSource audioSource;
 
+	void Awake(){
+		audioSource = GetComponent<AudioSource>();
+	}
     // Use this for initialization
     void Start () {
     }
@@ -33,6 +38,7 @@ public class DualBlastersScript : MonoBehaviour {
     {
         if (lastShot + fireRate < Time.time)
         {
+			audioSource.PlayOneShot (shotSound);
             GameObject clone;
             clone = Instantiate(projectile, spawnPoint.position, spawnPoint.rotation);
             clone.GetComponent<ProjectileScript>().SetParent(Reticle,Gauge,this.gameObject);

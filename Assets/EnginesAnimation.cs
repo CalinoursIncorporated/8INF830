@@ -5,12 +5,20 @@ using UnityEngine;
 public class EnginesAnimation : MonoBehaviour
 {
 
+	public AudioClip movementSound;
+
+	private AudioSource audioSource;
+
+	void Awake(){
+		audioSource = GetComponent<AudioSource>();
+	}
 
     public float ThrottlePercent = 0.0f;
     ParticleSystem[] engines;
     // Use this for initialization
     void Start()
     {
+		audioSource.Play ();
         engines = GetComponentsInChildren<ParticleSystem>();
         //for (int i = 0; i < engines.Length; i++)
         //{
