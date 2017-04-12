@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RandomMusic : MonoBehaviour {
 
-    public List<AudioClip> Musics;
+    public List<AudioClip> Musiques;
 
     private AudioSource source;
 
@@ -12,9 +12,9 @@ public class RandomMusic : MonoBehaviour {
 	void Start () {
         source = GetComponent<AudioSource>();
 
-        if(Musics.Count >=1)
+        if(Musiques.Count >=1)
         {
-            source.clip = Musics[Random.Range(0, Musics.Count)];
+            source.clip = Musiques[Random.Range(0, Musiques.Count)];
         }
         source.Play();
         
