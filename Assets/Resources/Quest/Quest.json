@@ -12,7 +12,7 @@
       "reward": "200,201,202",
       "rewardQuantity": "1,1,1",
       "subQuests": "100,101,102",
-      "victory": 0
+      "victory": 1
 			},
     {
       "id": 100,
