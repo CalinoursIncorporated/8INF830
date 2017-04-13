@@ -49,6 +49,16 @@ public class CraftManager : MonoBehaviour
             AddCraft(database.database[i].id);
         }
 
+        int impS = Data.instance.GetComponentInChildren<BaseStats>().printerStat;
+        for(int t = 0; t < recipePanel.Length; t++)
+        {
+            recipePanel[t].SetActive(false);
+        }
+        for(int i = 0; i < impS && i < recipePanel.Length; i++)
+        {
+            recipePanel[i].SetActive(true);
+        }
+
     }
 
     public void AddCraft(int id)
