@@ -172,18 +172,6 @@ public class CraftManager : MonoBehaviour
 
     private int countItemId(int id)
     {
-        int ret = 0;
-        Dictionary<Item, int> inventory = inventoryModel.inventory;
-        foreach (Item key in inventory.Keys) // looking for the component in the inventory items List
-        {
-
-            if (key.id == id)
-            {
-                ret += inventory[key];
-            }
-        }
-
-        Debug.Log("Wait" +id + " : " + ret);
-        return ret;
+        return inventoryController.GetQuantity(id);
     }
 }
