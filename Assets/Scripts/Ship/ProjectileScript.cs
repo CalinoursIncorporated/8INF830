@@ -10,6 +10,7 @@ public class ProjectileScript : MonoBehaviour
     public GameObject weapon;
     public float damage;
 
+
     // Use this for initialization
     void Start()
     {
@@ -42,6 +43,7 @@ public class ProjectileScript : MonoBehaviour
                     {
                         if (weapon.name == "Dual Blasters")
                         {
+							
                             weapon.GetComponent<DualBlastersScript>().DestroyEnemyAnimation(temp.transform);
                         }
                         if (weapon.name == "Bomb Launcher")
