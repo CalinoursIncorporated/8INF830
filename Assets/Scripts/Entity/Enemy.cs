@@ -19,6 +19,7 @@ public class Enemy : Entity {
 
     protected override void endOfLife()
     {
+        GameObject.Find("Data").GetComponentInChildren<OtherStats>().DestroyedEnemies++;
         base.endOfLife();
     }
 

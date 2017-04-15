@@ -52,7 +52,8 @@ public class PlayerMovement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		warpTime = warpSound.length + 0.5f;
+        warpTime = warpSound.length + 0.5f;
+        FindObjectOfType<QuestProgress>().StartTimer();
         engineAnimation = GetComponentInChildren<EnginesAnimation>();
         rb = GetComponent<Rigidbody>();
         stats = GameObject.Find("Stats").GetComponent<ShipStats>();
@@ -76,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                Debug.Log("warpGauge gameObject empty");
+                Debug.LogError("warpGauge gameObject empty");
             }
         }
     }

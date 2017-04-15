@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DualBlastersScript : MonoBehaviour {
+public class DualBlastersScript : Weapon {
 
     public new string name = "DualBlasters";
     public int range;
