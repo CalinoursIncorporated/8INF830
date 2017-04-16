@@ -74,11 +74,7 @@ public class PlayerMovement : MonoBehaviour
             warpSlider = warpGauge.GetComponentInChildren<Slider>();
             if (warpSlider == null)
             {
-                Debug.Log("Couldn't find warp slider");
-            }
-            else
-            {
-                Debug.LogError("warpGauge gameObject empty");
+                Debug.LogError("Couldn't find warp slider");
             }
         }
     }
